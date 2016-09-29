@@ -113,7 +113,7 @@ public class Main {
 	
 	private static void printJoin(Dao dao) {
 		String sql = "SELECT CONCAT(u.name, ' ', u.lastname) AS User, ut.runnerNumber AS Runner, t.name AS Team,"
-			+ " p.transaction AS TransactID, p.amount AS Amount FROM User u, UserTeam ut, Team t, Payment p"
+			+ " p.idTransaction AS TransactID, p.amount AS Amount FROM User u, UserTeam ut, Team t, Payment p"
 			+ " WHERE u.idUser = ut.idUser AND ut.idTeam = t.idTeam AND t.idTeam = p.idTeam AND t.idTeam = ? LIMIT 1";
 		
 		try {
