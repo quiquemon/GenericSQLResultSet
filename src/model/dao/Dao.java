@@ -137,36 +137,6 @@ public final class Dao {
 	}
 	
 	/**
-	 * Runs the given query and returns the result set. This method should only
-	 * be used with SELECT queries.
-	 * 
-	 * @param sql The SQL query to execute.
-	 * @return A list of hashtables, each one representing one row of the result set.
-	 * If the result set is empty, then the returned map will be empty as well.
-	 * @throws RuntimeException If an error occurs while fetching the result set.
-	 */
-	public List<Map<String, Object>> query(String sql) {
-		try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
-			List<Map<String, Object>> table = new ArrayList<>();
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int numberOfColumns = rsmd.getColumnCount();
-			
-			while (rs.next()) {
-				Map<String, Object> column = new HashMap<>();
-				for (int i = 1; i <= numberOfColumns; i++) {
-					column.put(rsmd.getColumnLabel(i), rs.getObject(i));
-				}
-				
-				table.add(column);
-			}
-			
-			return table;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	/**
 	 * Runs the given query with the specified parameters and returns the result set.
 	 * This method should only be used with SELECT queries. The number of parameters
 	 * must math the number of '?' tokens in the query.
